@@ -42,7 +42,6 @@ class Parser {
     private static boolean checkPdf(String filename) {
         int dotIndex = filename.lastIndexOf('.');
         String extension = filename.substring(dotIndex + 1).toLowerCase();
-        if (extension.equals("pdf")) return true;
-        else return false;
+        return extension.equals("pdf");
     }
 }
