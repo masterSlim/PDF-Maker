@@ -20,13 +20,14 @@ public class PDFWriter implements Writer {
     }
 
     public boolean write(IncomingInfo info) throws FileNotFoundException, DocumentException {
+        //берём полученую информацию и записываем в файл. По окончании возвращаем true в случае успеха и false при неудаче
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(filePath));
             doc.open();
             doc.addTitle(info.getName() + " "+ info.getSurname());
             doc.addSubject(info.getPosition());
             doc.close();
-            System.out.println("Succes writed to " + filePath);
+            System.out.println("Успешно записано в файл " + filePath);
             return true;
         } catch (DocumentException de) {
             System.err.println(de.getMessage());
