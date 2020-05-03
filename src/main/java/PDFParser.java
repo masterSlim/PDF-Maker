@@ -1,14 +1,9 @@
-import com.itextpdf.text.pdf.PdfDictionary;
-import com.itextpdf.text.pdf.PdfName;
-import com.itextpdf.text.pdf.PdfObject;
-import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
-
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 
-class Parser {
+class PDFParser {
     /**
      * Метод принимает на вход строковое представление файла и возвращает HashMap с местом вхождения строки в качестве
      * ключа и самой расшифрованной строкой в качестве значения
