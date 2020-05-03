@@ -6,8 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 public class PDFWriter implements Writer {
-    Document doc;
-    String filePath;
+    private final Document doc;
+    private final String filePath;
 
     public PDFWriter(String filePath) {
         doc = new Document();
@@ -23,9 +23,10 @@ public class PDFWriter implements Writer {
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(filePath));
             doc.open();
-            doc.addTitle("Title string");
-            doc.addSubject("Subject string");
+            doc.addTitle(info.getName() + " "+ info.getSurname());
+            doc.addSubject(info.getPosition());
             doc.close();
+            System.out.println("Succes writed to " + filePath);
             return true;
         } catch (DocumentException de) {
             System.err.println(de.getMessage());
@@ -33,5 +34,8 @@ public class PDFWriter implements Writer {
             doc.close();
         }
         return false;
+    }
+    public String getFilePath(){
+        return filePath;
     }
 }
