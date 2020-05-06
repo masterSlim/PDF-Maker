@@ -1,3 +1,4 @@
+package logic;
 public class IncomingInfo {
     private String name;
     private String surname;

@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PDF Maker" />
+        <module name="PDFMaker" />
       </profile>
     </annotationProcessing>
   </component>

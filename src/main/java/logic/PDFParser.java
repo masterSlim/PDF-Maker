@@ -1,3 +1,5 @@
+package logic;
+
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.*;

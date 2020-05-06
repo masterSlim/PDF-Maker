@@ -1,3 +1,4 @@
+package logic;
 import com.itextpdf.text.DocumentException;
 
 import java.io.FileNotFoundException;
