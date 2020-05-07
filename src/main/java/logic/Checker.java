@@ -3,6 +3,7 @@ package logic;
 /**
  * Првоеряет различную поступающую ему информацию на соответствие требованиям
  */
+
 public class Checker {
     //TODO добавить реальные проверки
 
@@ -18,7 +19,7 @@ public class Checker {
         return true;
     }
 
-    public static boolean checkPhone(int[] phone) {
+    public static boolean checkPhone(byte[] phone) {
         return true;
     }
 
@@ -30,7 +31,7 @@ public class Checker {
         return true;
     }
 
-    public static boolean checkIcq(int[] icq) {
+    public static boolean checkIcq(byte[] icq) {
         return true;
     }
 }
