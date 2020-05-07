@@ -1,0 +1,7 @@
+logic\IncomingInfo.class
+logic\Writer.class
+logic\Checker.class
+Main.class
+logic\MyPDFWriter.class
+controllers\MainWindowController.class
+logic\PDFParser.class
