@@ -14,7 +14,7 @@ public class MyPDFWriter implements Writer {
     private final String filePath;
     private final PdfWriter writer;
     private final PdfDocument pdfDoc;
-    private PdfFont fontRegular;
+    private PdfFont fontMedium;
     private PdfFont fontLight;
     private PdfFont fontSemiBold;
 
@@ -34,50 +34,47 @@ public class MyPDFWriter implements Writer {
         initFonts();
     }
     private void initFonts() throws IOException {
-        fontRegular = PdfFontFactory.createFont("src/main/resources/fonts/Open Sans/OpenSans-Regular_0.ttf", "CP1251", true);
-        fontSemiBold = PdfFontFactory.createFont("src/main/resources/fonts/Open Sans/OpenSans-Semibold_0.ttf", "CP1251", true);
-        fontLight = PdfFontFactory.createFont("src/main/resources/fonts/Open Sans/OpenSans-Light_0.ttf", "CP1251", true);
-        doc.setFont(fontRegular);
+        fontMedium = PdfFontFactory.createFont("src/main/resources/fonts/SF UI Display/sf-ui-display-medium-58646be638f96.otf", "Identity-H", true);
+        fontSemiBold = PdfFontFactory.createFont("src/main/resources/fonts/SF UI Display/sf-ui-display-semibold-58646eddcae92.otf",  "Identity-H",true);
+        fontLight = PdfFontFactory.createFont("src/main/resources/fonts/SF UI Display/sf-ui-display-light-58646b33e0551.otf", "Identity-H", true);
     }
 
     public boolean write(IncomingInfo info){
         //берём полученую проверенную информацию и записываем в файл. По окончании возвращаем true в случае успеха и false при неудаче
          //TODO добавить ко всем объектам Paragraph шрифт, размер, позицию на странице
-        Paragraph name = new Paragraph(info.getName());
-        name.setFont(fontSemiBold);
-        name.setFontSize(20);
-        Paragraph surname = new Paragraph(info.getSurname());
-        surname.setFont(fontSemiBold);
-        surname.setFontSize(20);
+        //слияние имени и фамилии в одну строку
+        String fullName = info.getName() + " " + info.getSurname();
+        Paragraph name = new Paragraph(fullName);
+        name.setFont(fontMedium);
+        name.setFontSize(30);
         Paragraph position = new Paragraph(info.getPosition());
-        position.setFont(fontRegular);
-        position.setFontSize(16);
+        position.setFont(fontLight);
+        position.setFontSize(20);
         //TODO сделать проверку номера на пул номеров компании
         Paragraph phone = new Paragraph(info.getPhone());
-        phone.setFont(fontRegular);
-        phone.setFontSize(14);
+        phone.setFont(fontLight);
+        phone.setFontSize(20);
         //TODO сделать проверку почты на соответствие домену компании
         Paragraph email = new Paragraph(info.getEmail());
-        email.setFont(fontRegular);
-        email.setFontSize(14);
+        email.setFont(fontLight);
+        email.setFontSize(20);
         try {
             doc.add(name);
-            doc.add(surname);
             doc.add(position);
             doc.add(phone);
             doc.add(email);
             //TODO возможно, стоит сделать проверку на пустой объект не в этом месте
             if(info.getSkype() != null) {
                 Paragraph skype = new Paragraph(info.getSkype());
-                skype.setFont(fontRegular);
-                skype.setFontSize(14);
+                skype.setFont(fontLight);
+                skype.setFontSize(20);
                 doc.add(skype);
             }
             //TODO возможно, стоит сделать проверку на пустой объект не в этом месте
             if(info.getIcq() != null) {
-                Paragraph icq =  new Paragraph(info.getIcq().toString());
-                icq.setFont(fontRegular);
-                icq.setFontSize(14);
+                Paragraph icq =  new Paragraph(info.getIcq());
+                icq.setFont(fontLight);
+                icq.setFontSize(20);
                 doc.add(icq);
             }
             doc.close();

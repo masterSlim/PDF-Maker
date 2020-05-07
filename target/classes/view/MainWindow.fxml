@@ -7,41 +7,41 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="mainWindow" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainWindowController">
+<AnchorPane fx:id="mainWindow" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainWindowController" styleClass="style.css">
    <children>
       <VBox layoutX="173.0" layoutY="212.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <TextField fx:id="nameField" promptText="Имя">
+            <TextField fx:id="nameField" promptText="Имя" text="иван">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="surnameField" layoutX="20.0" layoutY="20.0" promptText="Фамилия">
+            <TextField fx:id="surnameField" layoutX="20.0" layoutY="20.0" promptText="Фамилия" text="алексеенко">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="positionField" layoutX="20.0" layoutY="79.0" promptText="Должность">
+            <TextField fx:id="positionField" layoutX="20.0" layoutY="79.0" promptText="Должность" text="дизайнер">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="phoneField" layoutX="20.0" layoutY="138.0" promptText="Рабочий номер телефона">
+            <TextField fx:id="phoneField" layoutX="20.0" layoutY="138.0" promptText="Рабочий номер телефона" text="9372902697">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="emailField" layoutX="20.0" layoutY="197.0" promptText="Рабочая почта">
+            <TextField fx:id="emailField" layoutX="20.0" layoutY="197.0" promptText="Рабочая почта" text="i.alekseenko@del-ko.ru">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="skypeField" layoutX="20.0" layoutY="256.0" promptText="Skype">
+            <TextField fx:id="skypeField" layoutX="20.0" layoutY="256.0" promptText="Skype" text="skype">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="icqField" layoutX="20.0" layoutY="315.0" promptText="ICQ">
+            <TextField fx:id="icqField" layoutX="20.0" layoutY="315.0" promptText="ICQ" text="286282448">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>

@@ -56,10 +56,6 @@ public class IncomingInfo {
      */
     public String getPosition() {
         position = position.substring(0, 1).toUpperCase() + position.substring(1);
-
-        //TODO не забыть удалить
-        System.out.println(position);
-
         return position;
     }
 
@@ -146,7 +142,7 @@ public class IncomingInfo {
         for (int i = 0; i < this.icq.length; i++) {
             icqString.append(this.icq[i]);
             if ((this.icq.length % 3 == 0) && ((i + 1) % 3 == 0)) icqString.append(" ");
-            if ((i + 1) % 4 == 0) icqString.append(" ");
+            if ((this.icq.length % 3 != 0) && ((i + 1) % 4 == 0)) icqString.append(" ");
         }
 
         return icqString.toString();
