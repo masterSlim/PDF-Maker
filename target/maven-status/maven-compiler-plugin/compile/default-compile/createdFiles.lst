@@ -1,7 +1,9 @@
-logic\IncomingInfo.class
+MainLauncher.class
+controllers\MainWindowController$1.class
+logic\PDFWriter.class
 logic\Writer.class
 logic\Checker.class
 Main.class
-logic\MyPDFWriter.class
+logic\Information.class
 controllers\MainWindowController.class
 logic\PDFParser.class

@@ -1,0 +1,65 @@
+.root{
+    background-color: #dedede;
+    -fx-background-color: background-color;
+}
+
+@font-face {
+    font-family: 'Open Sans Regular';
+    src: url('../fonts/OpenSans-Regular_0.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans Light';
+    src: url('../fonts/OpenSans-Light_0.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans Semibold';
+    src: url('../fonts/OpenSans-Semibold_0.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans Bold';
+    src: url('../fonts/OpenSans-Bold_0.ttf');
+}
+
+.big {
+    -fx-font-family: 'Open Sans Bold';
+    -fx-font-size: 20;
+    -fx-background-insets: 0, 0;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: background-color;
+}
+
+.normal {
+    -fx-font-family: 'Open Sans Regular';
+    -fx-font-size: 15;
+    -fx-background-insets: 0, 0;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: background-color;
+}
+.normalLabel {
+    -fx-font-family: 'Open Sans Regular';
+    -fx-font-size: 15;
+    -fx-background-color: background-color;
+}
+.error{
+    -fx-font-family: 'Open Sans Regular';
+    -fx-font-size: 15;
+    -fx-background-insets: 0, 0;
+    -fx-background-color: white;
+    -fx-border-color: red;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: background-color;
+}
+
+.button{
+    -fx-font-family: 'Open Sans Semibold';
+    -fx-font-size: 10;
+    -fx-text-fill: white;
+    -fx-background-color: #fe7723;
+}

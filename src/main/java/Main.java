@@ -26,7 +26,7 @@ public class Main extends Application {
         scene = new Scene(mainWindow);
         main = new Stage();
         main.setTitle("PDF Maker");
-        main.getIcons().add(new Image("images/icon.png"));
+        main.getIcons().add(new Image("images/Icon.png"));
         main.setResizable(false);
         main.setScene(scene);
         main.show();
