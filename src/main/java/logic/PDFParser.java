@@ -1,14 +1,19 @@
 package logic;
 
-import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.PdfDictionary;
+import com.itextpdf.text.pdf.PdfName;
+import com.itextpdf.text.pdf.PdfObject;
+import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
-import java.io.*;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 class PDFParser {
     /**
-     * Метод принимает на вход строковое представление файла и возвращает HashMap с местом вхождения строки в качестве
-     * ключа и самой расшифрованной строкой в качестве значения
+     * Метод принимает на вход строковое представление файла PDF и возвращает HashMap с местом вхождения строки
+     * в качестве ключа и самой расшифрованной строкой в качестве значения
      */
     public static HashMap<Integer, String> parse(String input) throws IOException {
         HashMap<Integer, String> parsed = new HashMap<Integer, String>();
@@ -28,16 +33,18 @@ class PDFParser {
         rd.close();
         return parsed;
     }
+
     public static HashMap<Integer, String> testParse() throws IOException {
         HashMap<Integer, String> parsed = new HashMap<Integer, String>();
         PdfReader rd = new PdfReader("src/test/pages.pdf");
         // печататет в консоль текст, найденый на каждой странице в файле
         for (int i = 1; i <= rd.getNumberOfPages(); i++) {
             System.out.println("Page №" + i + " Text: " + "\n" + PdfTextExtractor.getTextFromPage(rd, i));
-            }
-            rd.close();
-            return parsed;
         }
+        rd.close();
+        return parsed;
+    }
+
     /**
      * Метод принимает на вход файл, проверяет, является ли он pdf файлом и возвращает HashMap с местом вхождения строки
      * в качестве ключа и самой расшифрованной строкой в качестве значения

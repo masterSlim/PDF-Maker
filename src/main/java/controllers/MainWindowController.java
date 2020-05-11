@@ -1,18 +1,20 @@
 package controllers;
 
 import com.itextpdf.text.DocumentException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import logic.Checker;
-import logic.IncomingInfo;
-import logic.MyPDFWriter;
+import logic.Information;
+import logic.PDFWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainWindowController {
-    MyPDFWriter myWriter;
+    PDFWriter generator;
 
     @FXML
     TextField phoneField;
@@ -29,32 +31,36 @@ public class MainWindowController {
     @FXML
     TextField icqField;
     @FXML
-    Label finalButton;
+    Button finalButton;
     private String name;
     private String surname;
     private String position;
-    private byte[] phone;
+    private String phone;
     private String email;
     private String skype;
-    private byte[] icq;
+    private String icq;
+
 
     /**
-     * Проверяются все заполняемые поля на наличие и правильность ввода. Если всё введено правильно, то создаётся объект
-     * класса MyPDFWriter и данные в виде объекта IncomingInfo передаются его методу write
+     * Контроллер главного экрана. Пр нажатии пользователя на finalButton проверяются все заполняемые поля на наличие
+     * и правильность ввода. Если всё введено правильно, то создаётся объект класса MyPDFWriter и данные в виде объекта
+     * IncomingInfo передаются его методу write
      *
      * @throws FileNotFoundException
      * @throws DocumentException
      */
-    public void sendInfo() throws IOException {
+
+
+    public void writeInfo() throws IOException {
         //TODO не забыть добавить +7 к номеру телефона перед печатью в файл
         if (checkRequired()) {
-            if(checkExtra()) {
+            if (checkExtra()) {
                 System.out.println("do write");
                 //TODO заменить тестовый конструктор на реальный
-                myWriter = new MyPDFWriter();
-                myWriter.write(IncomingInfo.getIncomingInfo(name, surname, position, phone, email, skype, icq));
+                generator = new PDFWriter();
+                generator.write(Information.getIncomingInfo(name, surname, position, phone, email, skype, icq));
             }
-            }
+        }
     }
 
     /**
@@ -64,7 +70,7 @@ public class MainWindowController {
      */
 
     boolean checkName() {
-        String name = nameField.getText().replace(" ", "");
+        String name = nameField.getText();
         if (Checker.checkName(name)) {
             this.name = name;
             return true;
@@ -80,13 +86,37 @@ public class MainWindowController {
      */
 
     boolean checkSurname() {
-        String surname = surnameField.getText().replace(" ", "");
+        String surname = surnameField.getText();
         if (Checker.checkSurname(surname)) {
             this.surname = surname;
             return true;
         }
         //TODO вывести ошибку пользователю
         else return false;
+    }
+
+    @FXML
+    public void phoneInput() {
+        numInput(phoneField);
+    }
+
+    @FXML
+    public void icqInput() {
+        numInput(icqField);
+    }
+
+    private void numInput(TextField numField) {
+        //запрет ввода чего-либо, кроме цифр
+        numField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    numField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
     }
 
     /**
@@ -96,7 +126,7 @@ public class MainWindowController {
      */
 
     boolean checkPosition() {
-        String position = positionField.getText().replace(" ", "");
+        String position = positionField.getText();
         if (Checker.checkPosition(position)) {
             this.position = position;
             return true;
@@ -105,42 +135,14 @@ public class MainWindowController {
         else return false;
     }
 
-    /**
-     * Проверка введённого номера телефона на правильность ввода и соотвествие требованиям
-     *
-     * @return true если проверка успешна и false если проверка провалилась
-     */
-
-    boolean checkPhone() {
-        // телефон изначально записывается без +7 или 8, их добавляет метод sendInfo
-
-        char[] phoneChars = phoneField.getText().replace(" ", "").toCharArray();
-        byte[] phone = new byte[10];
-
-        //предпроверка ввода: цифры это или нет и в каком количестве
-
-        //TODO запретить вводить буквы  убрать эту проверку
-
-        if (phoneChars.length == 10) {
-            for (int i = 0; i < phoneChars.length; i++) {
-                char ch = phoneChars[i];
-                //TODO вывести на экран причину ошибки
-                if (!Character.isDigit(ch)) {
-                    System.out.println("not digit in Phone");
-                    return false;
-                }
-                phone[i] = (byte) Character.getNumericValue(ch);
-            }
-        }
-        //TODO вывести ошибку пользователю
-        else return false;
-
-        //постпроверка в Checker
-
+    @FXML
+    public boolean checkPhone() {
+        String phone = phoneField.getText();
         if (Checker.checkPhone(phone)) {
             this.phone = phone;
             return true;
         }
+
         //TODO вывести ошибку пользователю
         else return false;
     }
@@ -152,7 +154,7 @@ public class MainWindowController {
      */
 
     boolean checkEmail() {
-        String email = emailField.getText().replace(" ", "");
+        String email = emailField.getText();
         if (Checker.checkEmail(email)) {
             this.email = email;
             return true;
@@ -168,7 +170,7 @@ public class MainWindowController {
      */
 
     boolean checkSkype() {
-        String skype = skypeField.getText().replace(" ", "");
+        String skype = skypeField.getText();
         if (Checker.checkSkype(skype)) {
             this.skype = skype;
             return true;
@@ -183,18 +185,9 @@ public class MainWindowController {
      * @return true если проверка успешна и false если проверка провалилась
      */
 
+
     boolean checkIcq() {
-        //размер номера аськи может быть разный, так что проверять количество цифр в нём не следует
-        char[] icqChars = icqField.getText().replace(" ", "").toCharArray();
-        byte[] icq = new byte[icqChars.length];
-        //проверка каждого символа цифра он или нет
-        //TODO запретить вводить буквы
-        for (int i = 0; i < icqChars.length; i++) {
-            char ch = icqChars[i];
-            //TODO вывести на экран причину ошибки
-            if (!Character.isDigit(ch)) return false;
-            icq[i] = (byte) Character.getNumericValue(ch);
-        }
+        String icq = icqField.getText();
         //TODO вывести на экран причину ошибки
         if (Checker.checkIcq(icq)) {
             this.icq = icq;
@@ -230,11 +223,13 @@ public class MainWindowController {
         //не пустая ли строка Скайп
         if (skype.equals("")) {
             skypeBool = true;
+            this.skype = null;
         } else skypeBool = checkSkype();
 
         //не пустая ли строка icq
         if (icq.equals("")) {
             icqBool = true;
+            this.icq = null;
         } else icqBool = checkIcq();
 
         return skypeBool && icqBool;

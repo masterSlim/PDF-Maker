@@ -4,5 +4,5 @@ import com.itextpdf.text.DocumentException;
 import java.io.FileNotFoundException;
 
 public interface Writer {
-    public boolean write(IncomingInfo info) throws FileNotFoundException, DocumentException;
+    public  boolean write(Information info) throws FileNotFoundException, DocumentException;
 }

@@ -1,13 +1,13 @@
 package logic;
 
-public class IncomingInfo {
+public class Information {
     private String name;
     private String surname;
     private String position;
-    private byte[] phone;
+    private String phone;
     private String email;
     private String skype;
-    private byte[] icq;
+    private String icq;
 
     /**
      * Формирует по заданным значениям и возвращает объект IncomingInfo
@@ -15,8 +15,9 @@ public class IncomingInfo {
      * @return String
      */
 
-    public static IncomingInfo getIncomingInfo(String name, String surname, String position, byte[] phone, String email, String skype, byte[] icq) {
-        IncomingInfo info = new IncomingInfo();
+    public static Information getIncomingInfo(String name, String surname, String position, String phone, String email, String skype, String icq) {
+        Information info = new Information();
+        //прямого доступа к полям нет, поэтому данные приводятся к соответствующиму виду только по запросу, в геттерах
         info.name = name;
         info.surname = surname;
         info.position = position;
@@ -34,7 +35,8 @@ public class IncomingInfo {
      */
 
     public String getName() {
-        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        // обработка строки:  первая заглавная, остальные строчные, убираются все пробелы, все цифры и символы, кроме букв
+        name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase().replaceAll("\\w|\\d|\\s", "");
         return name;
     }
 
@@ -45,7 +47,8 @@ public class IncomingInfo {
      */
 
     public String getSurname() {
-        surname = surname.substring(0, 1).toUpperCase() + surname.substring(1);
+        // обработка строки:  первая заглавная, остальные строчные, убираются все пробелы, все цифры и символы, кроме букв
+        surname = surname.substring(0, 1).toUpperCase() + surname.substring(1).toLowerCase().replaceAll("\\w|\\d|\\s", "").replace(" ", "");
         return surname;
     }
 
@@ -55,22 +58,27 @@ public class IncomingInfo {
      * @return String
      */
     public String getPosition() {
-        position = position.substring(0, 1).toUpperCase() + position.substring(1);
+        // обработка строки:  первая заглавная, остальные строчные, убираются все пробелы, все цифры и символы, кроме букв
+        position = position.substring(0, 1).toUpperCase() + position.substring(1).toLowerCase().replaceAll("\\w|\\d", "");
         return position;
     }
 
     /**
-     * Форматирует и возвращает номер телефона в виде массива byte
+     * Форматирует и возвращает номер телефона в виде массива byte без 8 или 7 в начале
      *
      * @return byte[]
      */
 
     public byte[] getPhoneByte() {
+        byte[] phone = new byte[10];
+        for(int i =0; i<this.phone.length(); i++){
+            phone[i] = (byte) this.phone.charAt(i);
+        }
         return phone;
     }
 
     /**
-     * Форматирует и возвращает номер телефона в виде строки +7 987 654 32 10
+     * Форматирует и возвращает номер телефона в виде строки типа +7 987 654 32 10
      *
      * @return String
      */
@@ -79,8 +87,8 @@ public class IncomingInfo {
         StringBuilder phoneString = new StringBuilder("+7 ");
 
         //форматирование номера телефона, добавление пробелов между группами цифр
-        for (int i = 0; i < this.phone.length; i++) {
-            phoneString.append(this.phone[i]);
+        for (int i = 0; i < this.phone.length(); i++) {
+            phoneString.append(this.phone.charAt(i));
             switch (i) {
                 case 2:
                 case 5:
@@ -100,7 +108,7 @@ public class IncomingInfo {
      */
 
     public String getEmail() {
-        return email;
+        return email.toLowerCase();
     }
 
     /**
@@ -111,7 +119,7 @@ public class IncomingInfo {
 
     public String getSkype() {
         if (skype == null) return null;
-        return skype;
+        return skype.replace(" ", "");
     }
 
     /**
@@ -121,6 +129,10 @@ public class IncomingInfo {
      */
 
     public byte[] getIcqByte() {
+        byte[] icq = new byte[10];
+        for(int i =0; i<this.icq.length(); i++){
+            icq[i] = (byte) this.icq.charAt(i);
+        }
         return icq;
     }
 
@@ -139,10 +151,10 @@ public class IncomingInfo {
         StringBuilder icqString = new StringBuilder();
 
         //форматирование номера icq, добавление пробелов между группами цифр
-        for (int i = 0; i < this.icq.length; i++) {
-            icqString.append(this.icq[i]);
-            if ((this.icq.length % 3 == 0) && ((i + 1) % 3 == 0)) icqString.append(" ");
-            if ((this.icq.length % 3 != 0) && ((i + 1) % 4 == 0)) icqString.append(" ");
+        for (int i = 0; i < this.icq.length(); i++) {
+            icqString.append(this.icq.charAt(i));
+            if ((this.icq.length() % 3 == 0) && ((i + 1) % 3 == 0)) icqString.append(" ");
+            if ((this.icq.length() % 3 != 0) && ((i + 1) % 4 == 0)) icqString.append(" ");
         }
 
         return icqString.toString();
